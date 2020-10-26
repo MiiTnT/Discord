@@ -1,1 +1,1 @@
-"# Discord" 
+Simple discord plugin
