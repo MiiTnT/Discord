@@ -1,12 +1,15 @@
 package Discord.commands;
 
 import Discord.discord;
-import org.bukkit.Bukkit;
+import com.google.common.collect.Lists;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
-public class discordCMD implements CommandExecutor {
+import java.util.*;
+
+public class discordCMD implements CommandExecutor{
     private final discord main;
 
     public discordCMD(discord main) {
@@ -16,9 +19,10 @@ public class discordCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String link = this.main.getConfig().getString("DiscordLink");
-        if(args.length == 0) {
+
+        if (args.length == 0) {
             sender.sendMessage("§c[Discord] §e" + link);
-        }else {
+        } else {
             if (args[0].equalsIgnoreCase("help")) {
                 sender.sendMessage("§7=-=-=-=-=-=§c[Discord]§7=-=-=-=-=-=");
                 sender.sendMessage("§e/Discord §7Obtenir le lien du discord.");
@@ -30,7 +34,7 @@ public class discordCMD implements CommandExecutor {
                 sender.sendMessage("§7=-=-=-=-=-=§c[Discord]§7=-=-=-=-=-=");
             }
             if (args[0].equalsIgnoreCase("link")) {
-                if(sender.hasPermission("discord.link") || sender.isOp()) {
+                if (sender.hasPermission("discord.link") || sender.isOp()) {
                     try {
                         if (args[1].length() >= 1) {
                             if (args[1].contains("https://") || args[1].contains("http://")) {
@@ -46,19 +50,20 @@ public class discordCMD implements CommandExecutor {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         sender.sendMessage("§c[Discord] §cErreur: §7Veuilez indiquer un lien !");
                     }
-                }else{
+                } else {
                     sender.sendMessage("§c[Discord] §cErreur: §7Vous n'avez pas la permission !");
                 }
             }
             if (args[0].equalsIgnoreCase("reload")) {
-                if(sender.hasPermission("discord.reload") || sender.isOp()) {
+                if (sender.hasPermission("discord.reload") || sender.isOp()) {
                     this.main.reloadConfig();
                     sender.sendMessage("§c[Discord] §eConfiguration rechargée avec succès !");
-                }else{
+                } else {
                     sender.sendMessage("§c[Discord] §cErreur: §7Vous n'avez pas la permission !");
                 }
             }
         }
         return false;
     }
+
 }
