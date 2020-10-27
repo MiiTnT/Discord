@@ -1,7 +1,6 @@
 name: Discord
 version: 1.0
 main: Discord.discord
-api-version: 1.16
 authors: [ MiiTnT ]
 commands:
   discord:
