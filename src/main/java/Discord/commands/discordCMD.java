@@ -44,11 +44,10 @@ public class discordCMD implements CommandExecutor {
                 }catch(ArrayIndexOutOfBoundsException e){
                     sender.sendMessage("§c[Discord] §cErreur: §7Veuilez indiquer un lien !");
                 }
-
-//                if(args[1].length() != 1){
-//
-//                }
-
+            }
+            if (args[0].equalsIgnoreCase("reload")) {
+                this.main.reloadConfig();
+                sender.sendMessage("§c[Discord] §eConfiguration rechargée avec succès !");
             }
         }
         return false;
